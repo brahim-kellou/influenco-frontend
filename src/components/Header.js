@@ -103,7 +103,7 @@ const Header = (props) => {
           </Link>
           <Link
             component={RouterLink}
-            to="/analytics"
+            to="/instagram-analytics"
             variant="button"
             color="textPrimary"
             className={classes.link}

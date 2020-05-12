@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.instagram-container {
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  background-color: #F6E6F1
+}

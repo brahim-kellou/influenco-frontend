@@ -10,6 +10,7 @@ import Login from './LoginContainer';
 import Register from './RegisterContainer';
 import InfluencerList from './InfluencerListContainer';
 import Influencer from './InfluencerContainer';
+import Analytics from './AnalyticsContainer';
 import PrivateRoute from './PrivateRoute';
 
 import AskButton from '../components/AskButton';
@@ -46,7 +47,8 @@ const App = () => {
             <PrivateRoute exact path="/influencers" component={InfluencerList} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route excat path="/influencers/:username" component={Influencer} />
+            <Route exact path="/influencers/:username" component={Influencer} />
+            <Route exact path="/instagram-analytics" component={Analytics} />
           </Switch>
           <AskButton />
         </ThemeProvider>
