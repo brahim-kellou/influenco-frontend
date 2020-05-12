@@ -12,7 +12,7 @@ import InfluencerList from './InfluencerListContainer';
 import Influencer from './InfluencerContainer';
 import PrivateRoute from './PrivateRoute';
 
-import AskButton from './components/AskButton';
+import AskButton from '../components/AskButton';
 
 import store from '../store';
 import { loadUser } from '../actions/auth';
