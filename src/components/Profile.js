@@ -13,10 +13,12 @@ import InsightCard from './InsightCard';
 
 const useStyles = makeStyles(theme => ({
   section: {
-    padding: theme.spacing(8, 0)
+    padding: theme.spacing(8, 0),
+    width: '100%'
   },
   subSection: {
-    padding: theme.spacing(4, 0)
+    padding: theme.spacing(4, 0),
+    width: '100%'
   },
   headerContainer: {
     display: 'flex',
@@ -56,7 +58,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const AnalyticsView = (props) => {
+const Profile = (props) => {
 
   function FollowersFormat(labelValue) {
     return Math.abs(Number(labelValue)) >= 1.0e+6
@@ -107,10 +109,10 @@ const AnalyticsView = (props) => {
                 </div>
                 <div className={classes.metric}>
                   <Typography variant="h6" className={classes.metricTitle}>
-                    361
+                    {FollowersFormat(profile.following)}
                   </Typography>
                   <Typography variant="caption">
-                    {FollowersFormat(profile.following)}
+                    following
                   </Typography>
                 </div>
               </div>
@@ -141,18 +143,8 @@ const AnalyticsView = (props) => {
           </Grid>
         </Container>
       </div>
-      <div className={classes.subSection}>
-        <Container maxWidth='md'>
-          <Typography variant="h5" className={classes.titleSection} style={{ fontWeight: '600' }}>Engagement rate over time</Typography>
-        </Container>
-      </div>
-      <div className={classes.subSection}>
-        <Container maxWidth='md'>
-          <Typography variant="h5" className={classes.titleSection} style={{ fontWeight: '600' }}>Followers growth</Typography>
-        </Container>
-      </div>
     </React.Fragment>
   )
 }
 
-export default AnalyticsView;
+export default Profile;

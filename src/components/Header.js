@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import Link from '@material-ui/core/Link';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,7 +27,8 @@ const useStyles = makeStyles(theme => ({
   },
   link: {
     margin: theme.spacing(1, 1.5),
-    textTransform: 'none'
+    textTransform: 'none',
+    textDecoration: 'none'
   },
   auth: {
     flex: 1
@@ -76,11 +79,21 @@ const Header = (props) => {
     </nav>
   );
 
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <AppBar position="sticky" color="default" elevation={0} className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <Typography component="h2" variant="h5" color="inherit" noWrap className={classes.toolbarTitle}>
-          Influenco
+          <img src="/influenco-logo.png" width={100}></img>
         </Typography>
         <nav>
           <Link
@@ -103,13 +116,54 @@ const Header = (props) => {
           </Link>
           <Link
             component={RouterLink}
-            to="/instagram-analytics"
+            to="/trends"
             variant="button"
             color="textPrimary"
             className={classes.link}
           >
+            Trends
+          </Link>
+          <Link
+            component={RouterLink}
+            variant="button"
+            color="textPrimary"
+            className={classes.link}
+            onClick={handleMenu}
+            aria-controls="simple-menu" aria-haspopup="true"
+          >
             Analytics
           </Link>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>
+              <Link
+                component={RouterLink}
+                to="/twitter-analytics"
+                variant="button"
+                color="textPrimary"
+                className={classes.link}
+                style={{ width: '100%' }}
+              >
+                Twitter
+              </Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link
+                component={RouterLink}
+                to="/instagram-analytics"
+                variant="button"
+                color="textPrimary"
+                className={classes.link}
+              >
+                Instagram
+              </Link>
+            </MenuItem>
+          </Menu>
         </nav>
         {isAuthenticated ? authLinks : guessLinks}
       </Toolbar>

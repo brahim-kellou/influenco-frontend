@@ -6,10 +6,12 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
 import Header from './HeaderContainer';
+import Home from './HomeContainer';
 import Login from './LoginContainer';
 import Register from './RegisterContainer';
 import InfluencerList from './InfluencerListContainer';
 import Influencer from './InfluencerContainer';
+import Trends from './TrendsContainer';
 import Analytics from './AnalyticsContainer';
 import PrivateRoute from './PrivateRoute';
 
@@ -19,15 +21,16 @@ import store from '../store';
 import { loadUser } from '../actions/auth';
 
 
+
 const theme = createMuiTheme({
   palette: {
     primary: {
       // main: '#1424ff',
-      main: '#6200ea',
+      main: '#0d0de6',
     },
     secondary: {
       // main: '#ff141c',
-      main: '#ea6d00',
+      main: '#ff4331',
     },
   },
 
@@ -39,21 +42,28 @@ const App = () => {
   });
 
   return (
-    <Provider store={store}>
-      <Router>
-        <ThemeProvider theme={theme}>
-          <Header />
-          <Switch>
-            <PrivateRoute exact path="/influencers" component={InfluencerList} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/influencers/:username" component={Influencer} />
-            <Route exact path="/instagram-analytics" component={Analytics} />
-          </Switch>
-          <AskButton />
-        </ThemeProvider>
-      </Router>
-    </Provider>
+    <div class="app">
+      <Provider store={store}>
+        <Router>
+          <ThemeProvider theme={theme}>
+            <Header />
+            <div className="h-100">
+              <Switch>
+                <PrivateRoute exact path="/influencers" component={InfluencerList} />
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/influencers/:username" component={Influencer} />
+                <Route exact path="/trends" component={Trends} />
+                <Route exact path="/twitter-analytics" render={() => <Analytics type="twitter" />} />
+                <Route exact path="/instagram-analytics" render={() => <Analytics type="instagram" />} />
+              </Switch>
+            </div>
+            <AskButton />
+          </ThemeProvider>
+        </Router>
+      </Provider>
+    </div>
   )
 }
 

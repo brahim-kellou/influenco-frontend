@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import InstagramAnalytics from '../components/InstagramAnalytics';
-import AnalyticsView from '../components/AnalyticsView';
+import AnalyticsInput from '../components/AnalyticsInput';
+import Profile from '../components/Profile';
 
 import { connect } from 'react-redux';
 import { getProfileDetails } from '../actions/influencerDetails';
@@ -18,14 +18,14 @@ const AnalyticsContainer = (props) => {
     setTimeout(function () {
       setIsLoaded(true)
       setIsLoading(false)
-    }, 5000)
+    }, 4000)
   };
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
-      {!isLoaded && <InstagramAnalytics submit={onSubmit} />}
+      {!isLoaded && <AnalyticsInput submit={onSubmit} socialMedia={props.type} />}
       {isLoading && !isLoaded && <CircularProgress className="mt-5" />}
-      {isLoaded != 0 && <AnalyticsView profile={props.profileDetails} />}
+      {isLoaded && <Profile profile={props.profileDetails} />}
     </div>
   )
 }

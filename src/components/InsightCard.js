@@ -95,7 +95,7 @@ export default function InsightCard(props) {
         </div>
         <div className={classes.bottomCard}>
           <Typography variant="caption" style={{ fontWeight: '600', color: "#00B430" }}>
-            High engagement
+            {props.level}
           </Typography>
         </div>
       </CardContent>

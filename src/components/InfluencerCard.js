@@ -90,6 +90,29 @@ const InfluencerCard = (props) => {
   }
 
   const classes = useStyles();
+  const insights = props.influencer
+  let {
+    id,
+    username,
+    fullname,
+    bio,
+    has_channel,
+    is_business_account,
+    business_category_name,
+    is_verified,
+    profile_pic_url,
+    user_status
+  } = props.influencer
+
+  let user_status_json = JSON.parse(user_status)
+
+  let {
+    followers,
+    posts,
+    engagement
+  } = user_status_json[user_status_json.length - 1]
+
+  engagement = parseFloat(engagement).toFixed(2)
 
   return (
     <Card>
@@ -103,34 +126,33 @@ const InfluencerCard = (props) => {
           <div className={classes.pictureContainer}>
             <Link underline="always" color="textPrimary" variant="caption"
               component={RouterLink}
-              to={{ pathname: `/influencers/${props.influencer.username}`, query: props.influencer.id }}
+              to={{ pathname: `/influencers/${username}`, query: id }}
             >
-              <Avatar alt="Remy Sharp" src={props.influencer.url_profile_picture} className={classes.avatar} />
+              <Avatar alt="Remy Sharp" src={profile_pic_url} className={classes.avatar} />
             </Link>
           </div>
           <div className={classes.nameContainer}>
             <Typography variant="subtitle2">
-              {props.influencer.name}
+              {fullname}
             </Typography>
             <Typography variant="caption">
-              {props.influencer.username}
+              {username}
             </Typography>
             <div className={classes.chips}>
-              <Chip className={classes.chip} label="Technology" size="small" />
-              <Chip className={classes.chip} label="Business" size="small" />
+              <Chip className={classes.chip} label="category" size="small" />
             </div>
           </div>
         </div>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
             <Typography variant="caption">
-              {props.influencer.bio}
+              {bio}
             </Typography>
           </div>
           <div className={classes.metricsContainer}>
             <div className={classes.metric}>
               <Typography variant="h6" className={classes.metricTitle}>
-                {FollowersFormat(props.influencer.followers)}
+                {FollowersFormat(followers)}
               </Typography>
               <Typography variant="caption">
                 followers
@@ -138,7 +160,7 @@ const InfluencerCard = (props) => {
             </div>
             <div className={classes.metric}>
               <Typography variant="h6" className={classes.metricTitle}>
-                {props.influencer.posts}
+                {posts}
               </Typography>
               <Typography variant="caption">
                 posts
@@ -146,7 +168,7 @@ const InfluencerCard = (props) => {
             </div>
             <div className={classes.metric}>
               <Typography variant="h6" className={classes.metricTitle} style={{ color: "#00B430" }}>
-                {props.influencer.engagement.toFixed(1) + "%"}
+                {engagement + "%"}
               </Typography>
               <Typography variant="caption">
                 Engagement
