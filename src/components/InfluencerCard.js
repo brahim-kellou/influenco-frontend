@@ -113,6 +113,14 @@ const InfluencerCard = (props) => {
   } = user_status_json[user_status_json.length - 1]
 
   engagement = parseFloat(engagement).toFixed(2)
+  let engagementColor = "#00B430" 
+
+  if (engagement < 3.5) {
+    engagementColor = "#d35400" 
+  } else if (engagement < 6) {
+    engagementColor = "#f1c40f"
+  }
+  
 
   return (
     <Card>
@@ -139,7 +147,7 @@ const InfluencerCard = (props) => {
               {username}
             </Typography>
             <div className={classes.chips}>
-              <Chip className={classes.chip} label="category" size="small" />
+              {business_category_name ? <Chip className={classes.chip} label={business_category_name} size="small" /> : null}
             </div>
           </div>
         </div>
@@ -167,7 +175,7 @@ const InfluencerCard = (props) => {
               </Typography>
             </div>
             <div className={classes.metric}>
-              <Typography variant="h6" className={classes.metricTitle} style={{ color: "#00B430" }}>
+              <Typography variant="h6" className={classes.metricTitle} style={{ color: engagementColor }}>
                 {engagement + "%"}
               </Typography>
               <Typography variant="caption">
